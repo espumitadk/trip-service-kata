@@ -4,10 +4,11 @@ namespace TripServiceKata.User
 {
     public class User
     {
+
         private List<Trip.Trip> trips = new List<Trip.Trip>();
         private List<User> friends = new List<User>();
 
-        public List<User> GetFriends()
+        public List<User> Friends()
         {
             return friends;
         } 

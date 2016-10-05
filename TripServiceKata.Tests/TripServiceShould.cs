@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 using NSubstitute;
@@ -23,7 +22,7 @@ namespace TripServiceKata.Tests
         [Test]
         public void throw_and_exception_when_the_user_is_not_logged()
         {
-            tripService.GetLoggedUser().Returns((User.User) null);
+            tripService.LoggedUser().Returns((User.User) null);
 
             Action action = () => tripService.GetTripsByUser(null);
 
@@ -34,7 +33,7 @@ namespace TripServiceKata.Tests
         [Test]
         public void not_throw_and_exception_when_the_user_is_logged()
         {
-            tripService.GetLoggedUser().Returns(new User.User());
+            tripService.LoggedUser().Returns(new User.User());
 
             Action action = () => tripService.GetTripsByUser(null);
 
@@ -46,7 +45,7 @@ namespace TripServiceKata.Tests
         public void not_get_frinend_trips_if_users_are_not_friends()
         {
             var bob = new User.User();
-            tripService.GetLoggedUser().Returns(bob);
+            tripService.LoggedUser().Returns(bob);
 
             tripService.GetTripsByUser(bob);
 
@@ -60,15 +59,13 @@ namespace TripServiceKata.Tests
             var bob = new User.User();
             var alice = new User.User();
             bob.AddFriend(alice);
-            tripService.GetLoggedUser().Returns(alice);
+            tripService.LoggedUser().Returns(alice);
             tripService.When(x => x.FindTripsByUser(Arg.Any<User.User>()))
                 .Do(x => { });
 
             tripService.GetTripsByUser(bob);
 
             tripService.Received().FindTripsByUser(Arg.Is(bob));
-
-
         }
 
     }
