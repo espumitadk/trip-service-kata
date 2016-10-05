@@ -43,7 +43,7 @@ namespace TripServiceKata.Tests
 
 
         [Test]
-        public void not_get_frinend_trips_if_users_are_not_friends()
+        public void not_get_frinen_trips_if_users_are_not_friends()
         {
             var bob = new User.User();
             tripService.GetLoggedUser().Returns(bob);
@@ -55,7 +55,7 @@ namespace TripServiceKata.Tests
 
 
         [Test]
-        public void find_frinend_trips_if_users_are_friends()
+        public void find_friend_trips_if_users_are_friends()
         {
             var bob = new User.User();
             var alice = new User.User();
