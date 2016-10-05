@@ -46,12 +46,11 @@ namespace TripServiceKata.Tests
         public void not_get_frinend_trips_if_users_are_not_friends()
         {
             var bob = new User.User();
-            var alice = new User.User();
             tripService.GetLoggedUser().Returns(bob);
 
-            List<Trip.Trip> tripServiceList = tripService.GetTripsByUser(bob);
+            tripService.GetTripsByUser(bob);
 
-            tripServiceList.Count.Should().Be(0);
+            tripService.Received(0).FindTripsByUser(Arg.Is(bob));
         }
 
 
@@ -65,7 +64,7 @@ namespace TripServiceKata.Tests
             tripService.When(x => x.FindTripsByUser(Arg.Any<User.User>()))
                 .Do(x => { });
 
-            List<Trip.Trip> tripServiceList = tripService.GetTripsByUser(bob);
+            tripService.GetTripsByUser(bob);
 
             tripService.Received().FindTripsByUser(Arg.Is(bob));
 
