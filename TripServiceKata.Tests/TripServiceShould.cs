@@ -49,7 +49,7 @@ namespace TripServiceKata.Tests
 
             tripService.GetTripsByUser(bob);
 
-            tripService.Received(0).FindTripsByUser(Arg.Is(bob));
+            tripService.DidNotReceive().FindTripsByUser(Arg.Is(bob));
         }
 
 
